@@ -12,15 +12,18 @@ def get_heatmap(url):
     html = str(urlopen(url).read())
     str_ind=html.index('{"heatMarkerRenderer":')
     end_ind=html.index('heatMarkersDecorations')
-    text_html=html[str_ind+22:end_ind-3]
+    text_html='{'+html[str_ind+22:end_ind-3]
     text_html=text_html.replace('"timeRangeStartMillis":','')
     text_html=text_html.replace('"markerDurationMillis":','')
     text_html=text_html.replace('"heatMarkerIntensityScoreNormalized":','')
     text_html=text_html.replace('{"heatMarkerRenderer":','')
     text_html=text_html.replace('},',',\n')
-    print(text_html)
-    with open("heatmap.txt",'w',encoding = 'utf-8') as f:
-       f.write(text_html)
+    
+    #uncomment to save the file also as txt file
+#     with open("heatmap.txt",'w',encoding = 'utf-8') as f:
+#        f.write(text_html)
+    
+    
     return text_html
 
 # print(get_heatmap(url))
